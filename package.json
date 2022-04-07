@@ -1,0 +1,38 @@
+{
+  "name": "tacoshop-srv",
+  "engines": {
+    "node": "14.x"
+  },
+  "dependencies": {
+    "@sap-cloud-sdk/core": "^1.53",
+    "@sap/cds": "^5.9.1",
+    "@sap/xsenv": "^3.2.1",
+    "@sap/xssec": "^3.2.13",
+    "axios": "^0.26.1",
+    "body-parser": "^1.20.0",
+    "cfenv": "^1.2.4",
+    "express": "^4.17.3",
+    "passport": "^0.5.2",
+    "qs": "^6.10.3"
+  },
+  "scripts": {
+    "start": "node ./srv/server.js",
+    "deploy:sqlite": "cds deploy -2 sqlite::memory:"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": ":memory:"
+        }
+      }
+    },
+    "features": {
+      "in_memory_db": true
+    }
+  },
+  "devDependencies": {
+    "sqlite3": "^5.0.2"
+  }
+}
