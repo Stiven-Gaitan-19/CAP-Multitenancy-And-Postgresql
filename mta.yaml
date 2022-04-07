@@ -4,12 +4,13 @@ version: 0.0.1
 
 parameters:
   enable-parallel-deployments: true
+  keep-existing-routes: true
 
 modules:
 
   - name: tacoshop-srv
     type: nodejs
-    path: srv
+    path: gen/srv
     parameters:
       memory: 256M
       disk-quota: 512M

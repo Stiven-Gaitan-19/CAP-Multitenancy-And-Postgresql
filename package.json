@@ -1,0 +1,65 @@
+{
+  "name": "tacoshop-srv",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/core": "^1.54.0",
+    "@sap/cds": "^5.9.2",
+    "@sap/xsenv": "^3.2.1",
+    "@sap/xssec": "^3.2.13",
+    "axios": "^0.26.1",
+    "body-parser": "^1.20.0",
+    "cfenv": "^1.2.4",
+    "express": "^4.17.3",
+    "passport": "^0.5.2",
+    "qs": "^6.10.3"
+  },
+  "devDependencies": {
+    "sqlite3": "^5.0.2"
+  },
+  "scripts": {
+    "start": "node ./srv/server.js",
+    "deploy:sqlite": "cds deploy -2 sqlite::memory:"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": ":memory:"
+        }
+      }
+    },
+    "features": {
+      "in_memory_db": true
+    }
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  }
+}

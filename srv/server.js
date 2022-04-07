@@ -1,32 +1,34 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
-const cfenv = require('cfenv');
+const cfenv = require("cfenv");
 const appEnv = cfenv.getAppEnv();
-const xsenv = require('@sap/xsenv');
+const xsenv = require("@sap/xsenv");
+
 xsenv.loadEnv();
 const services = xsenv.getServices({
-    uaa: { tag: 'xsuaa' },
-    registry: { tag: 'SaaS' }
-    , dest: { tag: 'destination' }
+  uaa: { tag: "xsuaa" },
+  registry: { tag: "SaaS" },
+  dest: { tag: "destination" },
 });
 
 const core = require('@sap-cloud-sdk/core');
 const { retrieveJwt } = require('@sap-cloud-sdk/core');
 
-const xssec = require('@sap/xssec');
-const passport = require('passport');
-passport.use('JWT', new xssec.JWTStrategy(services.uaa));
-app.use(passport.initialize());
-app.use(passport.authenticate('JWT', {
-    session: false
-}));
+const xssec = require("@sap/xssec");
+const passport = require("passport");
 
 app.use(bodyParser.json());
+const lib = require("./library");
 
-const lib = require('./library');
-
+passport.use("JWT", new xssec.JWTStrategy(services.uaa));
+app.use(passport.initialize());
+app.use(
+  passport.authenticate("JWT", {
+    session: false,
+  })
+);
 
 // subscribe/onboard a subscriber tenant
 app.put('/callback/v1.0/tenants/*', function (req, res) {
