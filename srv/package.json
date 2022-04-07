@@ -5,7 +5,6 @@
   },
   "dependencies": {
     "@sap-cloud-sdk/core": "^1.53",
-    "@sap/cds": "^5.9.1",
     "@sap/xsenv": "^3.2.1",
     "@sap/xssec": "^3.2.13",
     "axios": "^0.26.1",
@@ -16,8 +15,7 @@
     "qs": "^6.10.3"
   },
   "scripts": {
-    "start": "node ./srv/server.js",
-    "deploy:sqlite": "cds deploy -2 sqlite::memory:"
+    "start": "node server.js"
   },
   "cds": {
     "requires": {
@@ -32,7 +30,5 @@
       "in_memory_db": true
     }
   },
-  "devDependencies": {
-    "sqlite3": "^5.0.2"
-  }
+  "devDependencies": {}
 }
